@@ -4,25 +4,25 @@
 #define SIZE 5
 
 int queue[SIZE];
-int front = -1;
-int rear = -1;
+int F = -1;
+int R = -1;
 
 void enqueue(int value) {
     // Check for Queue Overflow
-    if (rear == SIZE - 1) {
+    if (R == SIZE - 1) {
         printf("Queue is full!\n");
         return;
     }
 
-    // Increment REAR pointer
-    rear++;
+    // Increment R pointer
+    R++;
 
     // Insert element
-    queue[rear] = value;
+    queue[R] = value;
 
-    // Is front pointer properly set?
-    if (front == -1) {
-        front = 0;
+    // Is F pointer properly set?
+    if (F == -1) {
+        F = 0;
     }
 
     printf("Enqueued %d\n", value);
@@ -30,19 +30,19 @@ void enqueue(int value) {
 
 int dequeue() {
     // Check for Queue Underflow
-    if (front == -1) {
+    if (F == -1) {
         printf("Queue is empty!\n");
         return -1;
     }
 
     // Delete element
-    int item = queue[front];
+    int item = queue[F];
 
     // Check if single element left in Queue
-    if (front == rear) {
-        front = rear = -1;
+    if (F == R) {
+        F = R = -1;
     } else {
-        front++;
+        F++;
     }
 
     printf("Dequeued %d\n", item);
@@ -50,11 +50,11 @@ int dequeue() {
 }
 
 void display() {
-    if (front == -1 || front > rear) {
+    if (F == -1 || F > R) {
         printf("Queue is empty!\n");
     } else {
         printf("Queue: ");
-        for (int i = front; i <= rear; i++) {
+        for (int i = F; i <= R; i++) {
             printf("%d ", queue[i]);
         }
         printf("\n");

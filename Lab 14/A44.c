@@ -5,10 +5,10 @@
 struct Node {
     int data;
     struct Node* next;
-};
+} *head = NULL;
 
 // Function to insert a node at the beginning
-void insertFirst(struct Node** head, int value) {
+void insertFirst(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = *head;
@@ -16,7 +16,7 @@ void insertFirst(struct Node** head, int value) {
 }
 
 // Function to insert a node at the end
-void insertLast(struct Node** head, int value) {
+void insertLast(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* temp = *head;
     newNode->data = value;
@@ -34,7 +34,7 @@ void insertLast(struct Node** head, int value) {
 }
 
 // Function to display the linked list
-void displayList(struct Node* head) {
+void displayList() {
     if (head == NULL) {
         printf("The list is empty.\n");
         return;
@@ -48,7 +48,7 @@ void displayList(struct Node* head) {
 }
 
 int main() {
-    struct Node* head = NULL;
+    //struct Node* head = NULL;
     int choice, value;
 
     do {

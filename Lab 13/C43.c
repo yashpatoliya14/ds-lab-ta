@@ -4,99 +4,97 @@
 #define SIZE 5
 
 int queue[SIZE];
-int front = -1;
-int rear = -1;
+int F = -1;
+int R = -1;
 
-void enqueueRear(int value) {
-    if (rear == SIZE - 1) {
+void DQinsert_R(int value) {
+    if (R == SIZE - 1) {
         printf("Queue is full!\n");
         return;
     }
 
-    // Increment REAR pointer
-    rear++;
+    // Increment R pointer
+    R++;
 
     // Insert element
-    queue[rear] = value;
+    queue[R] = value;
 
-    // Is front pointer properly set?
-    if (front == -1) {
-        front = 0;
+    // Is F pointer properly set?
+    if (F == -1) {
+        F = 0;
     }
 
     printf("Enqueued %d\n", value);
 }
 
-void enqueueFront(int value) {
+void DQinsert_front(int value) {
     // Check for Queue Overflow
-    if ((front == 1 && rear == SIZE - 1) || (front == rear + 1)) {
+    if (F == 0) {
         printf("Queue is full!\n");
     } else {
-        if (front == -1) { // If queue is empty
-            front = rear = 0;
-        } else if (front == 0) {
-            front = SIZE - 1;
+        if (F == -1) { // If queue is empty
+            F = 0;
+            R = 0;
         } else {
-            front = front - 1;
+            F = F - 1;
         }
-        queue[front] = value;
-        printf("Enqueued %d at the front\n", value);
+        queue[F] = value;
+        printf("Enqueued %d at the F\n", value);
     }
 }
 
-int dequeueFront() {
+int DQdelete_Front() {
     // Check for Queue Underflow
-    if (front == -1) {
+    if (F == -1) {
         printf("Queue is empty!\n");
         return -1;
     }
 
     // Delete element
-    int temp = queue[front];
+    int temp = queue[F];
 
     // Check if single element is left in Queue
-    if (front == rear) {
-        front = rear = -1;
+    if (F == R) {
+        F = R = -1;
     } else {
-        front = (front + 1) % SIZE;
+        F = F + 1;
     }
 
-    printf("Dequeued %d from the front\n", temp);
+    printf("Dequeued %d from the F\n", temp);
     return temp;
 }
 
-int dequeueRear() {
+int DQdelete_Rear() {
     // Check for Queue Underflow
-    if (rear == -1) {
+    if (R == -1) {
         printf("Queue is empty!\n");
         return -1;
     }
 
     // Delete element
-    int temp = queue[rear];
+    int temp = queue[R];
 
     // Check if single element is left in Queue
-    if (front == rear) {
-        front = rear = -1;
-    } else if (rear == 0) {
-        rear = SIZE - 1;
+    if (F == R) {
+        F = -1;
+        R = -1;
     } else {
-        rear = rear - 1;
+        R = R - 1;
     }
 
-    printf("Dequeued %d from the rear\n", temp);
+    printf("Dequeued %d from the R\n", temp);
     return temp;
 }
 
 void display() {
-    if (front == -1) {
+    if (F == -1) {
         printf("Queue is empty!\n");
     } else {
         printf("Queue: ");
-        int i = front;
+        int i = F;
         while (1) {
             printf("%d ", queue[i]);
-            if (i == rear) break;
+            if (i == R) break;
             i = (i + 1) % SIZE;
         }
         printf("\n");
@@ -106,32 +104,29 @@ void display() {
 int main() {
     int choice, value;
     while (1) {
-        printf("\n1. Enqueue Rear\n2. Enqueue Front\n3. Dequeue Front\n4. Dequeue Rear\n5. Display\n6. Exit\n");
+        printf("\n1. Enqueue R\n2. Enqueue F\n3. Dequeue F\n4. Dequeue R\n5. Display\n6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
             case 1:
-                printf("Enter value to enqueue at the rear: ");
+                printf("Enter value to enqueue at the R: ");
                 scanf("%d", &value);
-                enqueueRear(value);
+                DQinsert_R(value);
                 break;
             case 2:
-                printf("Enter value to enqueue at the front: ");
+                printf("Enter value to enqueue at the F: ");
                 scanf("%d", &value);
-                enqueueFront(value);
+                DQinsert_front(value);
                 break;
             case 3:
-                dequeueFront();
+                DQdelete_Front();
                 break;
             case 4:
-                dequeueRear();
-                break;
+                DQdelete_Front();R           break;
             case 5:
                 display();
                 break;
-            case 6:
-                exit(0);
             default:
                 printf("Invalid choice! Please try again.\n");
         }

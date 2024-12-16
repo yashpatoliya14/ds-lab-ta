@@ -4,38 +4,41 @@
 #define SIZE 5
 
 int queue[SIZE];
-int front = -1;
-int rear = -1;
+int F = -1;
+int R = -1;
 
-void enqueue(int value) {
+//change in simple----------------------------------------------------------- 
+void CQInsert(int value) {
     // Check for Queue Overflow
-    if ((rear + 1) % SIZE == front) {
-        printf("Queue is full!\n");
+    if (R == SIZE - 1) {
+            R = 0;  
     } else {
-        if (front == -1) {
-            front = 0;
-        }
-        rear = (rear + 1) % SIZE;
-        queue[rear] = value;
-        printf("Enqueued %d\n", value);
+            R++;  
+    }
+
+    if (F==R) {
+        printf("Queue is full!\n");
+    } else {        
+        queue[R] = value;  // Insert the new value
     }
 }
 
+
 int dequeue() {
     // Check for Queue Underflow
-    if (front == -1) {
+    if (F == -1) {
         printf("Queue is empty!\n");
         return -1;
     }
 
     // Delete element
-    int item = queue[front];
+    int item = queue[F];
     
     // Check if single element is left in Queue
-    if (front == rear) {
-        front = rear = -1;
+    if (F == R) {
+        F = R = -1;
     } else {
-        front = (front + 1) % SIZE;
+        F = (F + 1) % SIZE;
     }
 
     printf("Dequeued %d\n", item);
@@ -43,13 +46,13 @@ int dequeue() {
 }
 
 void display() {
-    if (front == -1) {
+    if (F == -1) {
         printf("Queue is empty!\n");
     } else {
-        int i = front;
+        int i = F;
         while (1) {
             printf("%d ", queue[i]);
-            if (i == rear) break;
+            if (i == R) break;
             i = (i + 1) % SIZE;
         }
         printf("\n");
@@ -59,15 +62,15 @@ void display() {
 int main() {
     int choice, value;
     while (1) {
-        printf("\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("\n1. CQInsert\n2. Dequeue\n3. Display\n4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
             case 1:
-                printf("Enter value to enqueue: ");
+                printf("Enter value to CQInsert: ");
                 scanf("%d", &value);
-                enqueue(value);
+                CQInsert(value);
                 break;
             case 2:
                 dequeue();

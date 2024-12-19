@@ -4,10 +4,10 @@
 struct Node {
     int data;
     struct Node* next;
-};
+} *head = null;
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Node** head, int data) {
+void insertEnd( int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
@@ -25,7 +25,7 @@ void insertEnd(struct Node** head, int data) {
 }
 
 // Function to search for a node with a specific value
-int searchNode(struct Node* head, int value) {
+int searchNode( int value) {
     struct Node* temp = head;
     int position = 0;
     while (temp != NULL) {
@@ -39,7 +39,7 @@ int searchNode(struct Node* head, int value) {
 }
 
 // Function to display the linked list
-void displayList(struct Node* head) {
+void displayList() {
     if (head == NULL) {
         printf("The list is empty.\n");
         return;

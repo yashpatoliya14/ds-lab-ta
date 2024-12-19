@@ -4,10 +4,10 @@
 struct Node {
     int data;
     struct Node* next;
-};
+} *head = null;
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Node** head, int data) {
+void insertEnd( int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
@@ -25,7 +25,7 @@ void insertEnd(struct Node** head, int data) {
 }
 
 // Function to count the number of nodes in the list
-int countNodes(struct Node* head) {
+int countNodes() {
     int count = 0;
     struct Node* temp = head;
     while (temp != NULL) {
@@ -36,7 +36,7 @@ int countNodes(struct Node* head) {
 }
 
 // Function to display the linked list
-void displayList(struct Node* head) {
+void displayList() {
     if (head == NULL) {
         printf("The list is empty.\n");
         return;

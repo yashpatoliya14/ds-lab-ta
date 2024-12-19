@@ -4,10 +4,10 @@
 struct Node {
     int data;
     struct Node* next;
-};
+} *head = null;
 
 // Function to delete the first node
-void deleteFirst(struct Node** head) {
+void deleteFirst() {
     if (*head == NULL) {
         printf("List is empty.\n");
         return;
@@ -19,7 +19,7 @@ void deleteFirst(struct Node** head) {
 }
 
 // Function to delete the last node
-void deleteLast(struct Node** head) {
+void deleteLast() {
     if (*head == NULL) {
         printf("List is empty.\n");
         return;
@@ -40,7 +40,7 @@ void deleteLast(struct Node** head) {
 }
 
 // Function to display the linked list
-void displayList(struct Node* head) {
+void displayList() {
     if (head == NULL) {
         printf("The list is empty.\n");
         return;
@@ -54,7 +54,7 @@ void displayList(struct Node* head) {
 }
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Node** head, int data) {
+void insertEnd(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
